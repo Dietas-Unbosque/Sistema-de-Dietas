@@ -42,12 +42,11 @@
 				<p:column>
 					<p:submenu label="Gestión Parametros">
 						<p:menuitem value="Nuevo" />
-						<p:menuitem action="#" ajax="flase"
-							value="Ver" />
+						<p:menuitem action="#" ajax="flase" value="Ver" />
 					</p:submenu>
 				</p:column>
 			</p:submenu>
-			
+
 			<p:submenu label="Reportes" icon="ui-icon-contact">
 
 				<p:column>
@@ -79,13 +78,32 @@
 			<p:messages id="messages" />
 			<h:panelGrid columns="3" cellpadding="5px" style="text-align:left">
 				<p:outputLabel for="txtModulo" value="Modulo:" />
-				<p:inputText id="txtModulo" required="true"
-					value="#{dietaMB.desc}"
-					requiredMessage="Ingrese Descripcion de la Dieta" label="Nombre">
+				<p:inputText id="txtModulo" required="true" value="#{dietaMB.desc}"
+					requiredMessage="Ingrese un Modulo para el Parametro"
+					label="Modulo">
 					<f:validateLength minimum="2" />
 					<p:watermark value="Modulo" for="txtModulo" />
 				</p:inputText>
 				<p:message for="txtModulo" />
+				
+				<p:outputLabel for="txtParametro" value="Parametro:" />
+				<p:inputText id="txtParametro" required="true"
+					value="#{dietaMB.desc}"
+					requiredMessage="Ingrese un nuevo Parametro" label="Parametro">
+					<f:validateLength minimum="2" />
+					<p:watermark value="Parametro" for="txtParametro" />
+				</p:inputText>
+				<p:message for="txtParametro" />
+				
+				<p:outputLabel for="txtValor" value="Valor:" />
+				<p:inputText id="txtValor" required="true"
+					value="#{dietaMB.desc}"
+					requiredMessage="Ingrese Valor" label="Valor">
+					<f:validateLength minimum="2" />
+					<p:watermark value="Valor" for="txtValor" />
+				</p:inputText>
+				<p:message for="txtValor" />
+
 				<h5>Los campos marcados con * son obligatorios</h5>
 			</h:panelGrid>
 			<p:commandButton ajax="false" actionListener="#{dietaMB.addDieta()}"
