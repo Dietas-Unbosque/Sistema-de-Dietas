@@ -10,13 +10,14 @@ import org.primefaces.context.RequestContext;
 import org.springframework.dao.DataAccessException;
 
 import com.unbosque.info.entidad.Parametro;
+import com.unbosque.info.entidad.Usuario;
 import com.unbosque.info.service.ParametroService;
 
 	@ManagedBean(name = "parametroMB")
 	@SessionScoped
 	public class ParametroMB implements Serializable {
-		@ManagedProperty("#{ParametroService}")
 		private static final long serialVersionUID = -4419488537807494697L;
+		@ManagedProperty("#{ParametroService}")
 		private ParametroService paramService;
 		private Parametro paramSelected;
 		private String estado;
@@ -40,6 +41,11 @@ import com.unbosque.info.service.ParametroService;
 			}catch (DataAccessException e){
 				e.printStackTrace();
 			}
+		}
+		
+		public void eliminar(Parametro par,String estado) {
+			par.setEstado(estado);
+			getParamService().deletePar(par);
 		}
 		
 		public void limpiarCampos (){
