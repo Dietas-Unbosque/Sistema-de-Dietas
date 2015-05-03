@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>DIETAS - Ver Parametros</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Usuarios" icon="ui-icon-check">
+				<p:column>
+					<p:submenu label="Gestión de Usuarios">
+						<p:menuitem action="AgregarUsuario?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerUsuarios?faces-redirect=true" ajax="flase"
+							value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Dietas" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Dietas">
+						<p:menuitem action="AgregarDieta?faces-redirect=true" ajax="flase"
+							value="Nuevo" />
+						<p:menuitem action="VerDietas?faces-redirect=true" ajax="flase"
+							value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Parametros" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Parametros">
+						<p:menuitem action="AgregarParametro?faces-redirect=true"
+							ajax="flase" value="AgregarParametro" />
+						<p:menuitem action="#" ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Reportes" icon="ui-icon-contact">
+
+				<p:column>
+					<p:submenu label="Reportes de Sistema">
+						<p:menuitem value="Ver" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:menuitem action="index?faces-redirect=true" ajax="flase"
+				value="Salir" icon="ui-icon-close" />
+
+		</p:megaMenu>
+	</h:form>
+	<!-- TABLA DE PARAMETROS -->
+	<p:dataTable id="dietas" var="_dieta" style="text-align:centre"
+		height="10px" width="auto" value="#{dietaMB.getDietas()}">
+
+		<p:column width="15" headerText="Id">
+			<h:outputText value="#{_parametro.id}" />
+		</p:column>
+
+		<p:column width="80" headerText="Modulo">
+			<h:outputText value="#{_parametro.modulo}" />
+		</p:column>
+		
+		<p:column width="100" headerText="Parametro">
+			<h:outputText value="#{_parametro.parametro}" />
+		</p:column>
+
+		<p:column width="255" headerText="Valor">
+			<h:outputText value="#{_parametro.valor}" />
+		</p:column>
+
+		<p:column width="50" headerText="Estado">
+			<h:outputText value="#{_parametro.estado}" />
+		</p:column>
+
+		<p:column width="100" headerText="Opciones">
+
+			<p:commandButton
+				actionListener="#{parametroMB.eliminar(_parametro,'I')}"
+				icon="ui-icon-trash" update="dietas">
+				<p:confirm header="Confirmación de Cambio de estado"
+					message="¿Esta seguro que desea Inactivar la Dieta?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:commandButton actionListener="#parametroMB.eliminar(_Parametro,'A')}"
+				icon="ui-icon-unlocked" update="dietas">
+				<p:confirm header="Confirmación de Cambio de estado"
+					message="¿Esta seguro que desea Activar la Dieta?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Si" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>
