@@ -64,12 +64,23 @@
 			<property name="sessionFactory" ref="SessionFactory"/>
 		</bean>
 		
+		<!-- BEANS PARA PARAMETRO -->
+		<bean id = "Parametro" class="com.unbosque.info.entidad.Parametro"/>
+		
+		<bean id = "ParametroService" class="com.unbosque.info.service.ParametroService">
+			<property name="ParametroDAO" ref="ParametroDAO"/>
+		</bean>
+		
+		<bean id = "ParametroDAO" class = "com.unbosque.info.dao.ParametroDAO">
+			<property name="sessionFactory" ref="SessionFactory"/>
+		</bean>
+		
 		
 	<!-- Data Source Declaration -->
 	<bean id="DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
 		<property name="driverClass" value="org.postgresql.Driver" />
-		<property name="jdbcUrl" value="jdbc:postgresql://localhost:5432/DIETAS" />
+		<property name="jdbcUrl" value="jdbc:postgresql://192.168.0.18:5432/DIETAS" />
 		<property name="user" value="postgres" />
 		<property name="password" value="root" />
 		<property name="maxPoolSize" value="10" />
