@@ -37,6 +37,17 @@
 				</p:column>
 			</p:submenu>
 
+			<p:submenu label="Parametros" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Parametros">
+						<p:menuitem action="AgregarParametro?faces-redirect=true"
+							ajax="flase" value="AgregarParametro" />
+						<p:menuitem action="#" ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
 			<p:submenu label="Reportes" icon="ui-icon-contact">
 
 				<p:column>
@@ -45,16 +56,7 @@
 					</p:submenu>
 				</p:column>
 			</p:submenu>
-
-			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
-
-				<p:column>
-					<p:submenu label="Ayuda al Administrador">
-						<p:menuitem value="Soporte Técnico" url="#" />
-					</p:submenu>
-				</p:column>
-			</p:submenu>
-
+			
 			<p:menuitem action="index?faces-redirect=true" ajax="flase"
 				value="Salir" icon="ui-icon-close" />
 
@@ -75,7 +77,7 @@
 		<p:column width="90" headerText="Estado">
 			<h:outputText value="#{_dieta.estado}" />
 		</p:column>
-		
+
 		<p:column headerText="Opciones">
 
 			<p:commandButton
@@ -86,7 +88,8 @@
 					icon="ui-icon-alert" />
 			</p:commandButton>
 
-			<p:commandButton actionListener="#dietaMB.eliminarDieta(_dieta,'A')}" icon="ui-icon-unlocked" update="dietas">
+			<p:commandButton actionListener="#dietaMB.eliminarDieta(_dieta,'A')}"
+				icon="ui-icon-unlocked" update="dietas">
 				<p:confirm header="Confirmación de Cambio de estado"
 					message="¿Esta seguro que desea Activar la Dieta?"
 					icon="ui-icon-alert" />

@@ -18,8 +18,10 @@
 			<p:submenu label="Usuarios" icon="ui-icon-check">
 				<p:column>
 					<p:submenu label="Gestión de Usuarios">
-						<p:menuitem action="AgregarUsuario?faces-redirect=true" ajax="flase" value="Nuevo" />
-						<p:menuitem action="VerUsuarios?faces-redirect=true" ajax="flase" value="Ver"/>
+						<p:menuitem action="AgregarUsuario?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerUsuarios?faces-redirect=true" ajax="flase"
+							value="Ver" />
 					</p:submenu>
 				</p:column>
 			</p:submenu>
@@ -28,12 +30,24 @@
 
 				<p:column>
 					<p:submenu label="Gestión de Dietas">
-						<p:menuitem value="Nuevo"/>
-						<p:menuitem action="VerDietas?faces-redirect=true" ajax = "flase" value="Ver"/>
+						<p:menuitem value="Nuevo" />
+						<p:menuitem action="VerDietas?faces-redirect=true" ajax="flase"
+							value="Ver" />
 					</p:submenu>
 				</p:column>
 			</p:submenu>
 
+			<p:submenu label="Parametros" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Parametros">
+						<p:menuitem action="AgregarParametro?faces-redirect=true" ajax="flase" value="AgregarParametro" />
+						<p:menuitem action="#" ajax="flase"
+							value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			
 			<p:submenu label="Reportes" icon="ui-icon-contact">
 
 				<p:column>
@@ -42,28 +56,21 @@
 					</p:submenu>
 				</p:column>
 			</p:submenu>
+			<p:menuitem action="index?faces-redirect=true" ajax="flase"
+				value="Salir" icon="ui-icon-close" />
 
-			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
-
-				<p:column>
-					<p:submenu label="Ayuda al Administrador">
-						<p:menuitem value="Soporte Técnico" url="#" />
-					</p:submenu>
-				</p:column>
-			</p:submenu>
-			
-			<p:menuitem action="index?faces-redirect=true" ajax="flase"  value="Salir"  icon="ui-icon-close"/>
-		
 		</p:megaMenu>
 	</h:form>
-	
+
 	<!-- FORMULARIO DEL USUARIO -->
 	<h:form id="form">
-		<p:panel id="panel" header="Agregar Dieta" style="width:600px;text-align:center; margin: 0 auto;">
+		<p:panel id="panel" header="Agregar Dieta"
+			style="width:600px;text-align:center; margin: 0 auto;">
 			<p:messages id="messages" />
 			<h:panelGrid columns="3" cellpadding="5px" style="text-align:left">
 				<p:outputLabel for="txtDescripcion" value="Descripcion:" />
-				<p:inputText id="txtDescripcion" required="true" value = "#{dietaMB.desc}"
+				<p:inputText id="txtDescripcion" required="true"
+					value="#{dietaMB.desc}"
 					requiredMessage="Ingrese Descripcion de la Dieta" label="Nombre">
 					<f:validateLength minimum="2" />
 					<p:watermark value="Descripción" for="txtDescripcion" />
@@ -71,7 +78,8 @@
 				<p:message for="txtDescripcion" />
 				<h5>Los campos marcados con * son obligatorios</h5>
 			</h:panelGrid>
-			<p:commandButton ajax="false" actionListener = "#{dietaMB.addDieta()}" value="Guardar" update="messages"></p:commandButton>
+			<p:commandButton ajax="false" actionListener="#{dietaMB.addDieta()}"
+				value="Guardar" update="messages"></p:commandButton>
 			<p:commandButton value="Cancelar" update="messages"></p:commandButton>
 		</p:panel>
 	</h:form>

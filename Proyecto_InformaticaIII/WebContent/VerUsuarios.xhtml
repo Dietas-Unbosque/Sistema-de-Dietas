@@ -37,6 +37,17 @@
 				</p:column>
 			</p:submenu>
 
+			<p:submenu label="Parametros" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Parametros">
+						<p:menuitem action="AgregarParametro?faces-redirect=true"
+							ajax="flase" value="AgregarParametro" />
+						<p:menuitem action="#" ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
 			<p:submenu label="Reportes" icon="ui-icon-contact">
 
 				<p:column>
@@ -45,19 +56,7 @@
 					</p:submenu>
 				</p:column>
 			</p:submenu>
-
-			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
-
-				<p:column>
-					<p:submenu label="Ayuda al Administrador">
-						<p:menuitem value="Soporte Técnico" url="#" />
-					</p:submenu>
-				</p:column>
-			</p:submenu>
-
-			<p:menuitem action="index?faces-redirect=true" ajax="flase"
-				value="Salir" icon="ui-icon-close" />
-
+			
 		</p:megaMenu>
 	</h:form>
 	<!-- TABLA DE USUARIOS -->
