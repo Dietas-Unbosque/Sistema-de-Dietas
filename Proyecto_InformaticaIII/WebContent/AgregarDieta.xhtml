@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>DIETAS - Agregar Dieta</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Usuarios" icon="ui-icon-check">
+				<p:column>
+					<p:submenu label="Gestión de Usuarios">
+						<p:menuitem action="AgregarUsuario?faces-redirect=true" ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerUsuarios?faces-redirect=true" ajax="flase" value="Ver"/>
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Dietas" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Dietas">
+						<p:menuitem value="Nuevo"/>
+						<p:menuitem action="VerDietas?faces-redirect=true" ajax = "flase" value="Ver"/>
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Reportes" icon="ui-icon-contact">
+
+				<p:column>
+					<p:submenu label="Reportes de Sistema">
+						<p:menuitem value="Ver" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
+
+				<p:column>
+					<p:submenu label="Ayuda al Administrador">
+						<p:menuitem value="Soporte Técnico" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+			
+			<p:menuitem action="index?faces-redirect=true" ajax="flase"  value="Salir"  icon="ui-icon-close"/>
+		
+		</p:megaMenu>
+	</h:form>
+	
+	<!-- FORMULARIO DEL USUARIO -->
+	<h:form id="form">
+		<p:panel id="panel" header="Agregar Dieta" style="width:600px;text-align:center; margin: 0 auto;">
+			<p:messages id="messages" />
+			<h:panelGrid columns="3" cellpadding="5px" style="text-align:left">
+				<p:outputLabel for="txtDescripcion" value="Descripcion:" />
+				<p:inputText id="txtDescripcion" required="true" value = "#{dietaMB.desc}"
+					requiredMessage="Ingrese Descripcion de la Dieta" label="Nombre">
+					<f:validateLength minimum="2" />
+					<p:watermark value="Descripción" for="txtDescripcion" />
+				</p:inputText>
+				<p:message for="txtDescripcion" />
+				<h5>Los campos marcados con * son obligatorios</h5>
+			</h:panelGrid>
+			<p:commandButton ajax="false" actionListener = "#{dietaMB.addDieta()}" value="Guardar" update="messages"></p:commandButton>
+			<p:commandButton value="Cancelar" update="messages"></p:commandButton>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>

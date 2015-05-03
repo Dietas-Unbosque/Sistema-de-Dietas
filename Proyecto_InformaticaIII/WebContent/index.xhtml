@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Login</title>
+    <style type="text/css">
+    body{
+        background-image: url(fongo.jpg);
+        background-repeat: no-repeat;
+    }
+    </style>
+</h:head>
+
+<h:body style="width: auto; height: auto">
+	<h2 align="center">Bienvenido, ingrese sus credenciales de acceso</h2>
+
+	<h:form >
+		<p:panel styleClass="session" header="Login" style = "width: 600px; text-align:center; margin: 0 auto;">
+			<p:messages id="messages" />
+			<h:panelGrid columns="3" style = "align:center">
+				<p:outputLabel for = "txtusuario" value="Usuario: " label = "Usuario"/>
+				<p:inputText value = "#{usuarioMB.usr}" id="txtusuario" required="true" requiredMessage="Ingrese Usuario!!" />
+				<p:message for="txtusuario" />
+				<p:outputLabel for = "txtclave" value="Clave: " />
+				<p:password value = "#{usuarioMB.cla}" id="txtclave" required="true" requiredMessage="Ingrese Clave!!" label = "Clave"/>
+				<p:message for="txtclave" />
+			</h:panelGrid>
+		<p:commandButton actionListener="#{usuarioMB.validarLogin()}" value = "OK" ajax = "false"/>
+		
+		</p:panel>
+
+	</h:form>
+</h:body>
+</html>

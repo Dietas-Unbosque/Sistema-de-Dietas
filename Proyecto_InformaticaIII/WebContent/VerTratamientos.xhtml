@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>DIETAS - Ver Tratamiento</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Pacientes" icon="ui-icon-check">
+				<p:column>
+					<p:submenu label="Gestión de Pacientes">
+						<p:menuitem action="AgregarPaciente?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerPacientes?faces-redirect=true" ajax="flase"
+							value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Tratamientos" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Tratamientos">
+						<p:menuitem action="AgregarTratamiento?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerTratamientos?faces-redirect=true"
+							ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Enfermedades" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Enfermedades">
+						<p:menuitem action="AgregarEnfermedad?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerEnfermedades?faces-redirect=true"
+							ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Historia Clínica" icon="ui-icon-contact">
+
+				<p:column>
+					<p:submenu label="Reportes de Sistema">
+						<p:menuitem value="Ver" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
+
+				<p:column>
+					<p:submenu label="Ayuda al Administrador">
+						<p:menuitem value="Soporte Técnico" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:menuitem action="index?faces-redirect=true" ajax="flase"
+				value="Salir" icon="ui-icon-close" />
+
+		</p:megaMenu>
+	</h:form>
+
+	<!-- TABLA DE USUARIOS -->
+	<p:dataTable id="tratamientos" var="_tratamiento"
+		style="text-align:centre" height="10px" width="auto"
+		value="#{tratamientoMB.getTratamientos()}">
+		
+		<p:column width="25" headerText="Id">
+			<h:outputText value="#{_tratamiento.id}" />
+		</p:column>
+
+		<p:column width="1024" headerText="Descripcion">
+			<h:outputText value="#{_tratamiento.descripcion}" />
+		</p:column>
+
+		<p:column width="90" headerText="Estado">
+			<h:outputText value="#{_tratamiento.estado}" />
+		</p:column>
+		<p:column headerText="Opciones">
+
+			<p:commandButton actionListener="#{tratamientoMB.eliminar(_tratamiento,'I')}"
+				icon="ui-icon-trash" update="tratamientos">
+				<p:confirm header="Confirmación de Cambio de estado"
+					message="¿Esta seguro que desea Inactivar el Tratamiento?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:commandButton actionListener="#{tratamientoMB.eliminar(_tratamiento,'A')}"
+				icon="ui-icon-unlocked" update="tratamientos">
+				<p:confirm header="Confirmación de Cambio de estado"
+					message="¿Esta seguro que desea Activar el Tratamiento?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Si" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>

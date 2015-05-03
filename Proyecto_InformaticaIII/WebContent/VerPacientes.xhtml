@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>DIETAS - Ver Pacientes</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Pacientes" icon="ui-icon-check">
+				<p:column>
+					<p:submenu label="Gestión de Pacientes">
+						<p:menuitem action="AgregarPaciente?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerPacientes?faces-redirect=true" ajax="flase"
+							value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Tratamientos" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Tratamientos">
+						<p:menuitem action="AgregarTratamiento?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerTratamientos?faces-redirect=true"
+							ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Enfermedades" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Enfermedades">
+						<p:menuitem action="AgregarEnfermedad?faces-redirect=true"
+							ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerEnfermedades?faces-redirect=true"
+							ajax="flase" value="Ver" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Historia Clínica" icon="ui-icon-contact">
+
+				<p:column>
+					<p:submenu label="Reportes de Sistema">
+						<p:menuitem value="Ver" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
+
+				<p:column>
+					<p:submenu label="Ayuda al Administrador">
+						<p:menuitem value="Soporte Técnico" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:menuitem action="index?faces-redirect=true" ajax="flase"
+				value="Salir" icon="ui-icon-close" />
+
+		</p:megaMenu>
+	</h:form>
+
+	<!-- TABLA DE USUARIOS -->
+	<p:dataTable id="pacientes" var="_paciente" height="10px" width="auto"
+		value="#{pacienteMB.getPacientes()}" style="width:auto"
+		emptyMessage="No hay registros disponibles" paginator="true" rows="10"
+		paginatorPosition="top"
+		paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+		rowsPerPageTemplate="5,10,15">
+		<p:column width="15" headerText="Id">
+			<h:outputText value="#{_paciente.id}" />
+		</p:column>
+
+		<p:column width="150" headerText="Identificacion">
+			<h:outputText value="#{_paciente.identificacion}" />
+		</p:column>
+
+		<p:column width="200" headerText="Nombre">
+			<h:outputText value="#{_paciente.nombresApellidos}" />
+		</p:column>
+
+		<p:column width="90" headerText="Estado">
+			<h:outputText value="#{_paciente.estado}" />
+		</p:column>
+
+		<p:column width="100" headerText="Teléfono">
+			<h:outputText value="#{_paciente.telefono}" />
+		</p:column>
+
+		<p:column width="200" headerText="Correo">
+			<h:outputText value="#{_paciente.correo}" />
+		</p:column>
+
+		<p:column width="150" headerText="Prog.Nutrición">
+			<h:outputText value="#{_paciente.progNutricion}" />
+		</p:column>
+		<p:column headerText="Opciones">
+			
+			<p:commandButton onclick="PF('dlg3').show();"
+				actionListener="#{usuarioMB.setUser(_usuario)}"
+				icon="ui-icon-pencil" update="usuario" />
+						
+			<p:commandButton actionListener="#{pacienteMB.eliminar(_paciente,'I')}"
+				icon="ui-icon-trash" update="pacientes">
+				<p:confirm header="Confirmación de Cambio de estado"
+					message="¿Esta seguro que desea Inactivar el Paciente?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:commandButton actionListener="#{pacienteMB.eliminar(_paciente,'A')}"
+				icon="ui-icon-unlocked" update="pacientes">
+				<p:confirm header="Confirmación de Cambio de estado"
+					message="¿Esta seguro que desea Activar el Paciente?"
+					icon="ui-icon-alert" />
+			</p:commandButton>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="explode">
+				<p:commandButton value="Si" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="No" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</p:column>
+	</p:dataTable>
+
+</h:body>
+</html>

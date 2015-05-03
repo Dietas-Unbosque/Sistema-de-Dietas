@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>DIETAS - Agregar Usuario</title>
+</h:head>
+
+<h:body>
+	<h:form>
+		<p:megaMenu orientation="#{megaMenuView.orientation}"
+			style="margin-top:20px">
+			<p:submenu label="Usuarios" icon="ui-icon-check">
+				<p:column>
+					<p:submenu label="Gestión de Usuarios">
+						<p:menuitem action="AgregarUsuario?faces-redirect=true" ajax="flase" value="Nuevo" />
+						<p:menuitem action="VerUsuarios?faces-redirect=true" ajax="flase" value="Ver"/>
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Dietas" icon="ui-icon-document">
+
+				<p:column>
+					<p:submenu label="Gestión de Dietas">
+						<p:menuitem value="Nuevo" action="AgregarDieta?faces-redirect=true" ajax="flase" />
+						<p:menuitem value="Ver"  action="VerDietas?faces-redirect=true" ajax="flase" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="Reportes" icon="ui-icon-contact">
+
+				<p:column>
+					<p:submenu label="Reportes de Sistema">
+						<p:menuitem value="Ver" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:submenu label="¿Ayuda?" icon="ui-icon-help">
+
+				<p:column>
+					<p:submenu label="Ayuda al Administrador">
+						<p:menuitem value="Soporte Técnico" url="#" />
+					</p:submenu>
+				</p:column>
+			</p:submenu>
+
+			<p:menuitem action="index?faces-redirect=true" ajax="flase"  value="Salir"  icon="ui-icon-close"/>
+
+		</p:megaMenu>
+	</h:form>
+
+	<!-- FORMULARIO DEL USUARIO -->
+	<h:form id="form">
+		<p:panel id="panel" header="Agregar Usuario"
+			style="width:600px;text-align:center; margin: 0 auto;margin-top:30px">
+			<p:messages id="messages" />
+			<h:panelGrid columns="3" cellpadding="5px" style="text-align:left">
+				
+				<p:outputLabel for="txtNombre" value="Apellidos-Nombre:" />
+				<p:inputText id="txtNombre" required="true"
+					value="#{usuarioMB.apellidosNombres}"
+					requiredMessage="Ingrese Nombre" label="Nombre">
+					<f:validateLength minimum="2" maximum = "60"/>
+					<p:watermark value="Nombre(s)" for="txtNombre" />
+				</p:inputText>
+				<p:message for="txtNombre" />
+				
+				<p:outputLabel for="txtLogin" value="Usuario:" />
+				<p:inputText id="txtLogin" value="#{usuarioMB.login}"
+					required="true" requiredMessage="Ingrese Usuario de Istema"
+					label="Usuario">
+					<f:validateLength minimum="6" maximum = "8" />
+					<p:watermark value="Login" for="txtLogin" />
+				</p:inputText>
+				<p:message for="txtLogin" />
+				
+				<p:outputLabel for="txtPass" value="Contraseña:" />
+				<p:password id="txtPass" value="#{usuarioMB.pass}" required="true"
+					requiredMessage="Ingrese Contraseña" label="Contraseña" feedback="true"
+                    promptLabel="Ingrese Contraseña" weakLabel="Débil"
+                    goodLabel="Buena" strongLabel="Excelente">
+					<f:validateLength minimum="6" maximum = "60" />
+					<p:watermark value="Contraseña de Acceso" for="txtPass" />
+				</p:password>
+				<p:message for="txtPass" />
+				
+				<p:outputLabel for="txtEmail" value="Email:" />
+				<p:inputText id="txtEmail" value="#{usuarioMB.correo}"
+					required="true" requiredMessage="Ingrese Email" label="Email">
+					<f:validateLength minimum="6" maximum = "60"/>
+					<p:watermark value="Correo Electrónico" for="txtEmail" />
+				</p:inputText>
+				<p:message for="txtEmail" />
+				
+				<h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+					<p:outputLabel for="tp" value="Tipo de Usuario:" />
+					<p:selectOneRadio id="tp" value="#{usuarioMB.tp}">
+						<f:selectItem itemLabel="Doctor" itemValue="D" />
+					</p:selectOneRadio>
+				</h:panelGrid>
+				<h1></h1>
+				<h5>Los campos marcados con * son obligatorios</h5>
+
+			</h:panelGrid>
+			<p:commandButton ajax="false" actionListener="#{usuarioMB.addUser()}"
+				value="Guardar" update="messages"></p:commandButton>
+			<p:commandButton value="Cancelar" action="#" update="messages"></p:commandButton>
+		</p:panel>
+	</h:form>
+
+</h:body>
+</html>
